@@ -16,7 +16,7 @@ This document is a guide to getting started with the [WebLogic Kubernetes Operat
 On your local machine, clone this repository by running the following command:
 
 ```
-git clone --recurse-submodules https://github.com/jnovotni/weblogic-operator-on-openshift.git
+git clone --recurse-submodules https://github.com/masauve/weblogic-operator-on-openshift.git
 ```
 
 Then, change directory to the newly cloned repository by running the following command:
