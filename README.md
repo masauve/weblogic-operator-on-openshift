@@ -1,6 +1,6 @@
-# Using WebLogic on OpenShift
+# WebLogic sur OpenShift (mode Domain-in-PV)
 ## Introduction
-This document is a guide to getting started with the [WebLogic Kubernetes Operator](https://github.com/oracle/weblogic-kubernetes-operator) on OpenShift using the [domain in image source type](https://oracle.github.io/weblogic-kubernetes-operator/userguide/managing-domains/choosing-a-model/). This guide is based on the [quick start provided in the operator documentation](https://oracle.github.io/weblogic-kubernetes-operator/quickstart/) and [this blog post written by Mark Nelson](https://blogs.oracle.com/weblogicserver/running-weblogic-on-openshift). 
+Ce document présente un exemple du [WebLogic Kubernetes Operator](https://github.com/oracle/weblogic-kubernetes-operator) sur OpenShift utilisant le mode [domain in pv](https://oracle.github.io/weblogic-kubernetes-operator/userguide/managing-domains/choosing-a-model/). Ce guide est basé sur le document suivant: [quick start provided in the operator documentation](https://oracle.github.io/weblogic-kubernetes-operator/quickstart/) et [this blog post written by Mark Nelson](https://blogs.oracle.com/weblogicserver/running-weblogic-on-openshift). 
 
 ## Prerequisites
 - You must have an account that has permission to access the Oracle Container Registry. This enables you to pull the base image used in the steps below. If you do not already have an account, you can go to https://container-registry.oracle.com and create one.
