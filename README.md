@@ -1,31 +1,43 @@
 # WebLogic sur OpenShift (mode Domain-in-PV)
 ## Introduction
-Ce document présente un exemple du [WebLogic Kubernetes Operator](https://github.com/oracle/weblogic-kubernetes-operator) sur OpenShift utilisant le mode [domain in pv](https://oracle.github.io/weblogic-kubernetes-operator/userguide/managing-domains/choosing-a-model/). Ce guide est basé sur le document suivant: [quick start provided in the operator documentation](https://oracle.github.io/weblogic-kubernetes-operator/quickstart/) et [this blog post written by Mark Nelson](https://blogs.oracle.com/weblogicserver/running-weblogic-on-openshift). 
+Ce document présente un exemple du [WebLogic Kubernetes Operator](https://github.com/oracle/weblogic-kubernetes-operator) sur OpenShift utilisant le mode [domain in pv](https://oracle.github.io/weblogic-kubernetes-operator/userguide/managing-domains/choosing-a-model/). Ce guide est basé sur le document suivant: [ WebLogic Operator documentation](https://oracle.github.io/weblogic-kubernetes-operator/quickstart/) et [ce blog de Mark Nelson](https://blogs.oracle.com/weblogicserver/running-weblogic-on-openshift). 
 
-## Prerequisites
-- You must have an account that has permission to access the Oracle Container Registry. This enables you to pull the base image used in the steps below. If you do not already have an account, you can go to https://container-registry.oracle.com and create one.
-- You must have the OpenShift command line tools installed (including `oc` and `kubectl`). You can download the latest tools from [this link](https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable-4.7/) (you'll look for the `openshift-client-{{ operating-system }}` file). 
-- You must have Helm (v3) installed on your local machine. You can find instructions to install the tool at [this link](https://helm.sh/docs/helm/helm_install/). 
-- You must have either Docker or Podman installed locally on your machine. It will be used it to pull, push, and build images. If you are looking to use Docker, follow these docs to install on [Mac](https://docs.docker.com/docker-for-mac/install/) or [Windows](https://docs.docker.com/docker-for-windows/install/)). If you're looking to use Podman (Linux) ensure that you have some kind of docker command emulation setup (such as the podman-docker package) so that the scripts run successfully.
-- You must have Java 8 installed and your JAVA_HOME variable set. You can find instructions at [this link](https://developers.redhat.com/blog/2018/12/10/install-java-rhel8#).
-- You must have Maven [downloaded](https://maven.apache.org/download.cgi) and [installed](https://maven.apache.org/install.html).
+Ce document présente une variante d'utilisation de l'Operator WebLogic.  Pour une autre variante, consultez le répertoire suivant pour le [domain in image](https://github.com/jnovotni/weblogic-operator-on-openshift)
+
+## Pré-requis
+- Vous devez avoir un compte autorisé à accéder au registre de conteneur d'Oracle. Cela vous permet d'aller chercher l'image de base utilisée dans les étapes ci-dessous.
+
+Si vous n'avez pas encore de compte, vous pouvez vous rendre sur https://container-registry.oracle.com et en créer un.
+
+Vous devez également accepter les conditions d'utilisation de l'image WebLogic à partir du Registre d'Oracle.
+
+- Vous devez avoir les outils de ligne de commande OpenShift installés (incluant `oc` et `kubectl`). 
+Vous pouvez télécharger la dernière version des outils à partir de
+ [ce lien](https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable-4.7/) ou télécharger à partir des menus de votre installation OpenShift.
+
+- Vous devez avoir Helm (v3) installé sur votre machine locale. Vous pouvez trouver des instructions pour installer l'outil ici:
+ [ce lien](https://helm.sh/docs/helm/helm_install/) ou télécharger à partir des menus de votre installation OpenShift.
+
 - You must have `cluster-admin` access to your OpenShift cluster. 
 
-### Part 1: Clone this Repository
+### Partie 1: Cloner ce répertoire GitHub
 
-On your local machine, clone this repository by running the following command:
+Sur votre ordinateur local, clonez ce dépôt en exécutant la commande suivante :
 
 ```
 git clone --recurse-submodules https://github.com/masauve/weblogic-operator-on-openshift.git
 ```
 
-Then, change directory to the newly cloned repository by running the following command:
+l'option --recurse-submodules est nécessaire. Le dépôt d'Oracle pour l'operator WebLogic est cloné dans un sous-répertoire et utilisé par cette procédure d'installation.
+
+
+Ensuite, changez de répertoire vers le référentiel nouvellement cloné en exécutant la commande suivante :
 
 ```
 cd weblogic-operator-on-openshift/
 ```
 
-### Part 2: Deploy the WebLogic Operator
+### Partie 2: Déployer l'Operator WebLogic 
 
 Login to OpenShift using your credentials. To get a token to login, follow these directions:
 
